@@ -40,6 +40,11 @@ Route::prefix('admin') -> group(function(){
     Route::group(['middleware'=>['admin']], function(){
         //  Admin Dashboard Rotues
         Route::get('/dashboard', [AdminController::class, 'AdminDashView']);
+        // Admin Updaet Password 
+        Route::match(['get', 'post'],'/update-password', [AdminController::class, 'AdminUpdatePassword']);
+
+
+        //  Admin Logotu Rotues
         Route::get('/logout', [AdminController::class, 'AdminLogout']) -> name('admin.logout');
     });
 
