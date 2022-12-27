@@ -31,5 +31,14 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-//  Admin Rotues
-Route::get('admin/dashboard', [AdminController::class, 'AdminDashView']);
+// Amdin Group Route
+Route::prefix('admin') -> group(function(){
+    
+    //  Admin Login Rotues
+    Route::get('/login', [AdminController::class, 'AdminLoginView']);
+
+    //  Admin Dashboard Rotues
+    Route::get('/dashboard', [AdminController::class, 'AdminDashView']);
+
+});
+

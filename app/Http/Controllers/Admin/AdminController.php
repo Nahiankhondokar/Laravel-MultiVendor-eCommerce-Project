@@ -11,4 +11,15 @@ class AdminController extends Controller
     public function AdminDashView (){
         return view('admin/dashboard');
     }
+
+
+    // Admin Login view
+    public function AdminLoginView (){
+        return view('admin/adminlogin');
+    }
+
+
+
+
+    
 }
