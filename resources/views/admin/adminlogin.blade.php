@@ -31,15 +31,33 @@
               </div>
               <h4>Hello! let's get started</h4>
               <h6 class="font-weight-light">Sign in to continue.</h6>
-              <form class="pt-3">
+              {{-- Error Message --}}
+              @if(Session::has('error_message'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{Session::get('error_message')}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              @endif
+              {{-- end Error Message --}}
+              <form class="pt-3" action="{{url('admin/login')}}" method="post">
+                @csrf
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" name="email" id="email">
+                  @error('email')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" name="password" id="password">
+                  @error('password')
+                  <span class="text-danger">{{$message}}</span>
+                @enderror
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="{{ url('admin/assets/') }}index.html">SIGN IN</a>
+                  {{-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="{{ url('admin/assets/') }}index.html"></a> --}}
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">

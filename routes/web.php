@@ -40,6 +40,7 @@ Route::prefix('admin') -> group(function(){
     Route::group(['middleware'=>['admin']], function(){
         //  Admin Dashboard Rotues
         Route::get('/dashboard', [AdminController::class, 'AdminDashView']);
+        Route::get('/logout', [AdminController::class, 'AdminLogout']) -> name('admin.logout');
     });
 
 });
