@@ -35,10 +35,12 @@ require __DIR__.'/auth.php';
 Route::prefix('admin') -> group(function(){
     
     //  Admin Login Rotues
-    Route::get('/login', [AdminController::class, 'AdminLoginView']);
-
-    //  Admin Dashboard Rotues
-    Route::get('/dashboard', [AdminController::class, 'AdminDashView']);
+    Route::match(['get', 'post'],'/login', [AdminController::class, 'AdminLoginView']);
+    // Route with "Admin" Guard
+    Route::group(['middleware'=>['admin']], function(){
+        //  Admin Dashboard Rotues
+        Route::get('/dashboard', [AdminController::class, 'AdminDashView']);
+    });
 
 });
 
