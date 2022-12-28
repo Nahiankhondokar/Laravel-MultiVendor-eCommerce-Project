@@ -44,7 +44,7 @@
               <form class="pt-3" action="{{url('admin/login')}}" method="post">
                 @csrf
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" name="email" id="email">
+                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" name="email" id="email">
                   @error('email')
                       <span class="text-danger">{{$message}}</span>
                   @enderror

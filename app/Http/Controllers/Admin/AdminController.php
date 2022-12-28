@@ -64,9 +64,47 @@ class AdminController extends Controller
         }
         $adminData = Admin::where(['email' => Auth::guard('admin') -> user() -> email]) -> first() -> toArray();
 
-        return view('admin.admin_details.admin_update_password', compact('adminData'));
+        return view('admin.admin_settings.admin_update_password', compact('adminData'));
     }
 
+    // Admin Update Details
+    public function AdminUpdateDetails(Request $request){
+    
+        // update details
+        if($request -> isMethod('post')){
+            // dd($request -> all()); die;
+
+            // validation
+            $this -> validate($request,[
+                'name'          => 'required',
+                'email'         => 'required|email'
+            ]);
+
+            // image upload
+            if($request -> hasFile('image')){
+                $img = $request -> file('image');
+                $unique_name = md5(time().rand()).'.'.$img -> getClientOriginalExtension();
+                $img -> move(public_path('media/admin/admin_photo'), $unique_name);
+                
+            }
+
+            // update details
+            Admin::find(Auth::guard('admin') -> user() -> id) -> update([
+                'name'      => $request -> name,
+                'email'     => $request -> email,
+                'mobile'    => $request -> mobile,
+                'image'     => $unique_name,
+                
+            ]);
+           
+            return redirect() -> back() -> with('success_message', 'Updated Admin Details !');
+        }
+        
+        $adminData = Admin::where(['id' => Auth::guard('admin') -> user() -> id]) -> first() -> toArray();
+
+        return view('admin.admin_settings.admin_update_details', compact('adminData'));
+    }
+    
 
     // checking valid current password
     public function AdminCurrentPassCheck(Request $request){
@@ -98,9 +136,5 @@ class AdminController extends Controller
         Auth::guard('admin') -> logout();
         return redirect('admin/login');
     }
-
-
-
-
     
 }
