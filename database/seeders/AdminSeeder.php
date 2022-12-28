@@ -18,10 +18,11 @@ class AdminSeeder extends Seeder
         // insert data
         $data = [
             [
-                'id'        => 1,
-                'name'      => 'Super Admin',
-                'type'      => 'superadmin',
-                'email'     => 'admin@gmail.com',
+                'id'        => 2,
+                'name'      => 'Jhon smith',
+                'vendor_id' => 1,
+                'type'      => 'vendor',
+                'email'     => 'vendor@gmail.com',
                 'password'  => '$2a$12$7FBvqhphCnfshO0oQTDP6.WRNMm1OtUrJ9vz/ZqFYBOpv/SDitSWi', // 112233
             ]
         ];
