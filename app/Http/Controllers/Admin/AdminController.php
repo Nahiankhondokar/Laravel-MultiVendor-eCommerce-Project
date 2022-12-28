@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -84,16 +85,24 @@ class AdminController extends Controller
             if($request -> hasFile('image')){
                 $img = $request -> file('image');
                 $unique_name = md5(time().rand()).'.'.$img -> getClientOriginalExtension();
-                $img -> move(public_path('media/admin/admin_photo'), $unique_name);
-                
-            }
+                // $image_path = $img -> move(public_path('media/admin/admin_photo'), $unique_name);
 
+                // image path with location
+                $image_path = 'media/admin/admin_photo/'.$unique_name;
+                Image::make($img) -> save('media/admin/admin_photo/'. $unique_name);
+
+                // delete old image
+                @unlink($request -> old_image);
+            }else {
+                $image_path = $request -> old_image;
+            }
+            
             // update details
             Admin::find(Auth::guard('admin') -> user() -> id) -> update([
                 'name'      => $request -> name,
                 'email'     => $request -> email,
                 'mobile'    => $request -> mobile,
-                'image'     => $unique_name,
+                'image'     => $image_path,
                 
             ]);
            

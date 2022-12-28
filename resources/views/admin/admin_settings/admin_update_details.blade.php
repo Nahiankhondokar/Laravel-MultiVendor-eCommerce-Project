@@ -82,6 +82,13 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Admin Photo</label>
                     <input type="file" class="form-control" name="image">
+
+                    <input type="hidden" class="form-control" value="{{$adminData['image']}}" name="old_image"> <br>
+                    @if(Auth::guard('admin') -> user() -> image)
+                    <img src="{{url($adminData['image'])}}" alt="" style="width: 50px; height: 50px; border-radious: 50%;">
+                    @else 
+                    <img src="{{url('media/avatar.png')}}" alt="" style="width: 50px; height: 50px; border-radious: 50%;">
+                    @endif
                 </div>
                 
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
