@@ -13,7 +13,7 @@
             // console.log(current_pass);
 
             $.ajax({
-                url: "/admin/update-password",
+                url: "/admin/check/current-password",
                 type: "post",
                 data: { current_pass },
                 success: function (res) {

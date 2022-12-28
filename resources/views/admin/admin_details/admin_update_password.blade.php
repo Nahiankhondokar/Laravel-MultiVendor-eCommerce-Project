@@ -35,10 +35,34 @@
           <div class="card">
             <div class="card-body">
               <h4 class="card-title">Update Admin Password</h4>
-              <p class="card-description">
-                Basic form layout
-              </p>
-              <form class="forms-sample" action="" method="post">
+              @if(Session::has('update_pass'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{Session::get('update_pass')}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div> 
+              @endif
+
+              @if(Session::has('pass_match_error'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{Session::get('pass_match_error')}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              @endif
+
+              @if(Session::has('current_pass_error'))
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{Session::get('current_pass_error')}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              @endif
+
+              <form class="forms-sample" action="{{url('admin/update-password')}}" method="post">
                 @csrf
                 <div class="form-group">
                   <label for="exampleInputUsername1">Admin Name</label>
