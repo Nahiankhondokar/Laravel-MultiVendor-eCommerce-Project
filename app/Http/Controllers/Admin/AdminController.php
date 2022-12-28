@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -45,6 +46,30 @@ class AdminController extends Controller
         $adminData = Admin::where(['email' => Auth::guard('admin') -> user() -> email]) -> first() -> toArray();
 
         return view('admin.admin_details.admin_update_password', compact('adminData'));
+    }
+
+
+    // Admin Update Password
+    public function AdminCurrentPassCheck(Request $request){
+        $current_pass = $request -> current_pass;
+        $loggedIn_user = Admin::find(Auth::guard('admin') -> user() -> id);
+
+        if(Hash::check($current_pass, $loggedIn_user -> password)){
+            return [
+                'status'        => 'true',
+                'message'       => 'Correct Password',
+                'type'          => 'success'
+            ];
+        }else {
+            return [
+                'status'        => 'false',
+                'message'       => 'Incorrect Password',
+                'type'          => 'danger'
+            ];
+        }
+        
+
+     
     }
 
 

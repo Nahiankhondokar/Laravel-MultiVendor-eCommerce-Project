@@ -38,31 +38,31 @@
               <p class="card-description">
                 Basic form layout
               </p>
-              <form class="forms-sample">
+              <form class="forms-sample" action="" method="post">
+                @csrf
                 <div class="form-group">
                   <label for="exampleInputUsername1">Admin Name</label>
-                  <input type="text" class="form-control" id="exampleInputUsername1" placeholder="name" name="name" value="{{$adminData['name']}}">
+                  <input type="text" class="form-control" value="{{$adminData['name']}}" readonly>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Admin Type</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="email" value="{{$adminData['type']}}">
+                  <input type="email" class="form-control" value="{{$adminData['type']}}" readonly>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Current Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" class="form-control" placeholder="Current Password" name="current_pass" id="current_pass">
+                  <div id="error_current_pass"></div>
+                  
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputPassword1">New Password</label>
+                    <input type="password" class="form-control" placeholder="New Password" name="new_pass">
+                  </div>
+                <div class="form-group">
                   <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                  <input type="password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">
-                </div>
-                <div class="form-check form-check-flat form-check-primary">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input">
-                    Remember me
-                  </label>
+                  <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_pass">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                <button class="btn btn-light">Cancel</button>
               </form>
             </div>
           </div>
