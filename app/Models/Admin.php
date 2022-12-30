@@ -13,4 +13,20 @@ class Admin extends Authenticatable
     
     protected $guarded = [];
 
+
+    // get data from vendor table
+    public function GetVendorData(){
+        return $this -> belongsTo(Vendor::class, 'vendor_id');
+    }
+
+    // get data from vendor business table
+    public function GetVendorBusinessData(){
+        return $this -> belongsTo(VendorBusinessDetails::class, 'vendor_id');
+    }
+
+    // get data from vendor bank table
+    public function GetVendorBankData(){
+        return $this -> belongsTo(VendorBankDetails::class, 'vendor_id');
+    }
+
 }

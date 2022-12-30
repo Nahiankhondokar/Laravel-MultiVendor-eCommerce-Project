@@ -96,7 +96,9 @@
                             @endif
                         </td>
                         <td>
-                          <button class="btn btn-sm btn-info">View</button>
+                         @if($item -> type == 'vendor')
+                         <a href="{{url('admin/vendor/view/'.$item->vendor_id)}}" class="btn btn-sm btn-info">View</a>
+                         @endif
                         </td>
                       </tr>
                       @endforeach

@@ -321,6 +321,17 @@ class AdminController extends Controller
         return view('admin.admin_mngt.admin_mngt', compact('title', 'adminData'));
     }
 
+    // single vendor view
+    public function SingleVendorView ($id){
+
+        $title = '';
+        $vendorData = Admin::with(['GetVendorData', 'GetVendorBusinessData', 'GetVendorBankData']) -> where('vendor_id', $id) -> first() -> toArray();
+
+        // dd($vendorData); die;
+
+        return view('admin.admin_mngt.single_vendor_view', compact('title', 'vendorData'));
+    }
+
 
     // Admin logout
     public function AdminLogout(){
