@@ -20,7 +20,8 @@ class VendorSeeder extends Seeder
             [
                 'id'        => 1,
                 'name'      => 'Vendor One',
-                'email'     => 'vendor@gmail.com'
+                'email'     => 'vendor@gmail.com',
+                'status'    => 0
             ]
         ];
 

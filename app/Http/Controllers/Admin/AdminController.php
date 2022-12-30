@@ -293,6 +293,35 @@ class AdminController extends Controller
     }
 
 
+    // amdin / sub-admin / vendor management
+    public function AdminManagement ($type = null){
+        if($type == 'all-admin'){
+            $admin = Admin::query();
+            // get data
+            $adminData = $admin -> where('type', 'admin') -> get();
+            $title = 'Admin List';
+            
+        }else if($type == 'all-sub-admin'){
+            $admin = Admin::query();
+            // get data
+            $adminData = $admin -> where('type', 'subadmin') -> get() -> toArray();
+            $title = 'Sub-Admin List';
+
+        }else if($type == 'all-vendor'){
+            $admin = Admin::query();
+            // get data
+            $adminData = $admin -> where('type', 'vendor') -> get();
+            $title = 'Vendor List';
+
+        }else {
+            $adminData = Admin::get();
+            $title = 'All Admin Panel';
+        }
+
+        return view('admin.admin_mngt.admin_mngt', compact('title', 'adminData'));
+    }
+
+
     // Admin logout
     public function AdminLogout(){
         Auth::guard('admin') -> logout();
