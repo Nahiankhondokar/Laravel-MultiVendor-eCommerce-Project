@@ -1,3 +1,12 @@
+@php
+    $prefix = Request::route() -> getPrefix();
+    $route = Route::current() -> getName();
+
+    // $uri = Route::getFacadeRoot() -> current() -> uri();
+    $uri = URL::current();
+
+@endphp
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       <li class="nav-item">
@@ -30,8 +39,8 @@
         </a>
         <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{url('admin/update-password')}}">Update Password</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{url('admin/update-details')}}">Update Details</a></li>
+            <li class="nav-item"> <a class="nav-link {{ ($route == 'update.admin.password') ? 'active' : '' }}" href="{{url('admin/update-password')}}">Update Password</a></li>
+            <li class="nav-item"> <a class="nav-link {{ ($route == 'update.admin.details') ? 'active' : '' }}" href="{{url('admin/update-details')}}">Update Details</a></li>
           </ul>
         </div>
       </li>
@@ -45,10 +54,10 @@
         <div class="collapse" id="admin-management">
           <ul class="nav flex-column sub-menu">
          
-            <li class="nav-item"> <a class="nav-link" href="{{url('admin/all-sub-admin')}}">Sub-Admin</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{url('admin/all-admin')}}">Admin</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{url('admin/all-vendor')}}">Vendor</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{url('admin/all')}}">All</a></li>
+            <li class="nav-item"> <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all-sub-admin') ? 'active' : '' }}" href="{{url('admin/all-sub-admin')}}">Sub-Admin</a></li>
+            <li class="nav-item"> <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all-admin') ? 'active' : '' }}" href="{{url('admin/all-admin')}}">Admin</a></li>
+            <li class="nav-item"> <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all-vendor') ? 'active' : '' }}" href="{{url('admin/all-vendor')}}">Vendor</a></li>
+            <li class="nav-item"> <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all') ? 'active' : '' }}" href="{{url('admin/all')}}">All</a></li>
           </ul>
         </div>
       </li>

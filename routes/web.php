@@ -42,17 +42,17 @@ Route::prefix('admin') -> group(function(){
         Route::get('/dashboard', [AdminController::class, 'AdminDashView']);
 
         // Admin Update Password 
-        Route::match(['get', 'post'],'/update-password', [AdminController::class, 'AdminUpdatePassword']);
+        Route::match(['get', 'post'],'/update-password', [AdminController::class, 'AdminUpdatePassword']) -> name('update.admin.password');
         Route::post('/check/current-password', [AdminController::class, 'AdminCurrentPassCheck']);
 
         // Admin Update Details 
-        Route::match(['get', 'post'],'/update-details', [AdminController::class, 'AdminUpdateDetails']);
+        Route::match(['get', 'post'],'/update-details', [AdminController::class, 'AdminUpdateDetails'])  -> name('update.admin.details');
 
         // Vendor Update Details 
-        Route::match(['get', 'post'],'/update-vendor-details/{slug}', [AdminController::class, 'VendorDetailsUpdate']);
+        Route::match(['get', 'post'],'/update-vendor-details/{slug}', [AdminController::class, 'VendorDetailsUpdate']) -> name('update.vendor.password');
 
         // admin / subadmin / vendor
-        Route::get('/{type?}', [AdminController::class, 'AdminManagement']);
+        Route::get('/{type?}', [AdminController::class, 'AdminManagement']) -> name('admin.type');
 
         // single vendor view
         Route::get('/vendor/view/{id}', [AdminController::class, 'SingleVendorView']);
