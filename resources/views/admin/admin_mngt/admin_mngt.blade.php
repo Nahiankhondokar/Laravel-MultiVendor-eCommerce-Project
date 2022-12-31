@@ -83,9 +83,9 @@
                         
                         <td>
                             @if($item -> status == 1)
-                            <span class="badge badge-success">Active</span>
+                            <a href="javascript:void(0)" class="adminStatusUpdate" admin_id="{{$item -> id}}" id="admin-{{$item -> id}}"><span status="{{$item->status}}" class="badge badge-success">Active</span></a>
                             @else 
-                            <span class="badge badge-danger">Inactive</span>
+                            <a href="javascript:void(0)" class="adminStatusUpdate" admin_id="{{$item -> id}}" id="admin-{{$item -> id}}"><span status="{{$item->status}}" class="badge badge-danger">Inactive</span></a>
                             @endif
                         </td>
                         <td>

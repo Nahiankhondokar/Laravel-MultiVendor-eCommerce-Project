@@ -57,6 +57,9 @@ Route::prefix('admin') -> group(function(){
         // single vendor view
         Route::get('/vendor/view/{id}', [AdminController::class, 'SingleVendorView']);
 
+        // admin status update
+        Route::get('/status/update/{admin_id}', [AdminController::class, 'AdminStatusUpdate']);
+
         //  Admin Logotu Rotues
         Route::get('/logout', [AdminController::class, 'AdminLogout']) -> name('admin.logout');
     });

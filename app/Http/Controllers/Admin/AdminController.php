@@ -333,6 +333,22 @@ class AdminController extends Controller
     }
 
 
+    // admin status update
+    public function AdminStatusUpdate ($admin_id, Request $request){
+
+        if($request -> status == 0){
+            Admin::where('id', $admin_id) -> update(['status' => 1]);
+            return 'active';
+        }else {
+             Admin::where('id', $admin_id) -> update(['status' => 0]);
+            return 'inactive';
+        }
+        
+        
+
+    }
+
+
     // Admin logout
     public function AdminLogout(){
         Auth::guard('admin') -> logout();
