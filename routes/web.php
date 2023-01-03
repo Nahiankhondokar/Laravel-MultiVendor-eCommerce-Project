@@ -39,7 +39,7 @@ Route::prefix('admin') -> group(function(){
     // Route with "Admin" Guard
     Route::group(['middleware'=>['admin']], function(){
         //  Admin Dashboard Rotues
-        Route::get('/dashboard', [AdminController::class, 'AdminDashView']);
+        Route::get('/dashboard', [AdminController::class, 'AdminDashView']) -> name('admin.dashboard');
 
         // Admin Update Password 
         Route::match(['get', 'post'],'/update-password', [AdminController::class, 'AdminUpdatePassword']) -> name('update.admin.password');
@@ -52,10 +52,10 @@ Route::prefix('admin') -> group(function(){
         Route::match(['get', 'post'],'/update-vendor-details/{slug}', [AdminController::class, 'VendorDetailsUpdate']) -> name('update.vendor.password');
 
         // admin / subadmin / vendor
-        Route::get('/{type?}', [AdminController::class, 'AdminManagement']) -> name('admin.type');
+        Route::get('/{type?}', [AdminController::class, 'AdminManagement']);
 
         // single vendor view
-        Route::get('/vendor/view/{id}', [AdminController::class, 'SingleVendorView']);
+        Route::get('/vendor/view/{id}', [AdminController::class, 'SingleVendorView']) -> name('single.vendor.view');
 
         // admin status update
         Route::get('/status/update/{admin_id}', [AdminController::class, 'AdminStatusUpdate']);

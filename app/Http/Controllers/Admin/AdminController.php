@@ -10,6 +10,7 @@ use App\Models\VendorBankDetails;
 use App\Models\VendorBusinessDetails;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
@@ -300,22 +301,26 @@ class AdminController extends Controller
             // get data
             $adminData = $admin -> where('type', 'admin') -> get();
             $title = 'Admin List';
+            Session::put('page', 'admin');
             
         }else if($type == 'all-sub-admin'){
             $admin = Admin::query();
             // get data
             $adminData = $admin -> where('type', 'subadmin') -> get() -> toArray();
             $title = 'Sub-Admin List';
+            Session::put('page', 'sub-admin');
 
         }else if($type == 'all-vendor'){
             $admin = Admin::query();
             // get data
             $adminData = $admin -> where('type', 'vendor') -> get();
             $title = 'Vendor List';
+            Session::put('page', 'vendor');
 
         }else {
             $adminData = Admin::get();
             $title = 'All Admin Panel';
+            Session::put('page', 'all-admin-data');
         }
 
         return view('admin.admin_mngt.admin_mngt', compact('title', 'adminData'));
@@ -343,9 +348,6 @@ class AdminController extends Controller
              Admin::where('id', $admin_id) -> update(['status' => 0]);
             return 'inactive';
         }
-        
-        
-
     }
 
 

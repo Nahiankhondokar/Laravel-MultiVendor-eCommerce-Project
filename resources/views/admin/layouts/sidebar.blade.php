@@ -7,9 +7,19 @@
 
 @endphp
 
+@if(Session::get('page') == 'all')
+  @php
+      echo 'done';
+  @endphp
+@endif
+
+{{-- {{Session::get('page')}}
+{{$route}} --}}
+
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
-      <li class="nav-item">
+      <li class="nav-item {{ ($route == 'admin.dashboard') ? 'active' : '' }}">
         <a class="nav-link" href="{{url('admin/dashboard')}}">
           <i class="icon-grid menu-icon"></i>
           <span class="menu-title">Dashboard</span>
@@ -54,10 +64,18 @@
         <div class="collapse" id="admin-management">
           <ul class="nav flex-column sub-menu">
          
-            <li class="nav-item"> <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all-sub-admin') ? 'active' : '' }}" href="{{url('admin/all-sub-admin')}}">Sub-Admin</a></li>
-            <li class="nav-item"> <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all-admin') ? 'active' : '' }}" href="{{url('admin/all-admin')}}">Admin</a></li>
-            <li class="nav-item"> <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all-vendor') ? 'active' : '' }}" href="{{url('admin/all-vendor')}}">Vendor</a></li>
-            <li class="nav-item"> <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all') ? 'active' : '' }}" href="{{url('admin/all')}}">All</a></li>
+            <li class="nav-item"> 
+              <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all-sub-admin') ? 'active' : '' }}" href="{{url('admin/all-sub-admin')}}">Sub-Admin</a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link {{ ($uri == 'http://127.0.0.1:8000/admin/all-admin') ? 'active' : '' }}" href="{{url('admin/all-admin')}}">Admin</a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link" href="{{url('admin/all-vendor')}}">Vendor</a>
+            </li>
+            <li class="nav-item"> 
+              <a class="nav-link @if(Session::get('page') === 'all-admin-data') active @endif" href="{{url('admin/all')}}">All</a>
+            </li>
           </ul>
         </div>
       </li>
